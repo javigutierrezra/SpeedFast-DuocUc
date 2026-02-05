@@ -1,38 +1,40 @@
-import java.util.List;
-import java.util.Random;
+package speedfast;
 
 public class Repartidor implements Runnable {
 
     private String nombre;
-    private List<Pedido> pedidos;
-    private Random random = new Random();
+    private ZonaDeCarga zonaDeCarga;
 
-    public Repartidor(String nombre, List<Pedido> pedidos) {
+    public Repartidor(String nombre, ZonaDeCarga zonaDeCarga) {
         this.nombre = nombre;
-        this.pedidos = pedidos;
+        this.zonaDeCarga = zonaDeCarga;
     }
 
     @Override
     public void run() {
-        System.out.println("🚴 Repartidor " + nombre + " inicia su ruta...");
 
-        for (Pedido pedido : pedidos) {
-            System.out.println("📦 " + nombre + " entregando pedido #" + pedido.idPedido);
-            pedido.mostrarResumen();
-            pedido.rastrear();
+        while (true) {
+            Pedido pedido = zonaDeCarga.retirarPedido();
 
-            try {
-                int tiempo = random.nextInt(3000) + 2000;
-                System.out.println("⏳ " + nombre + " tardará " + tiempo / 1000 + " segundos...");
-                Thread.sleep(tiempo);
-            } catch (InterruptedException e) {
-                System.out.println("❌ " + nombre + " fue interrumpido.");
+            if (pedido == null) {
+                break;
             }
 
-            System.out.println("✅ " + nombre + " entregó pedido #" + pedido.idPedido);
-            System.out.println("----------------------------------");
-        }
+            pedido.setEstado(EstadoPedido.EN_REPARTO);
+            System.out.println("🚴 " + nombre +
+                    " retiró pedido #" + pedido.getId() +
+                    " | Estado: " + pedido.getEstado());
 
-        System.out.println("🏁 Repartidor " + nombre + " terminó su ruta.");
+            try {
+                Thread.sleep(2000); // simula entrega
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            pedido.setEstado(EstadoPedido.ENTREGADO);
+            System.out.println("✅ " + nombre +
+                    " entregó pedido #" + pedido.getId() +
+                    " | Estado: " + pedido.getEstado());
+        }
     }
 }

@@ -1,5 +1,5 @@
-import java.util.Arrays;
-import java.util.List;
+package speedfast;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -7,24 +7,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Pedido> pedidos1 = Arrays.asList(
-                new PedidoComida(1, "Calle 10", 2.5),
-                new PedidoExpress(2, "Avenida 5", 1.2)
-        );
+        ZonaDeCarga zonaDeCarga = new ZonaDeCarga();
 
-        List<Pedido> pedidos2 = Arrays.asList(
-                new PedidoEncomienda(3, "Carrera 8", 4.0),
-                new PedidoComida(4, "Calle 20", 3.1)
-        );
+        // Agregar pedidos
+        zonaDeCarga.agregarPedido(new Pedido(1, "Calle A"));
+        zonaDeCarga.agregarPedido(new Pedido(2, "Calle B"));
+        zonaDeCarga.agregarPedido(new Pedido(3, "Calle C"));
+        zonaDeCarga.agregarPedido(new Pedido(4, "Calle D"));
+        zonaDeCarga.agregarPedido(new Pedido(5, "Calle E"));
 
-        List<Pedido> pedidos3 = Arrays.asList(
-                new PedidoExpress(5, "Zona Centro", 0.8),
-                new PedidoEncomienda(6, "Barrio Norte", 5.5)
-        );
-
-        Repartidor r1 = new Repartidor("Carlos", pedidos1);
-        Repartidor r2 = new Repartidor("Ana", pedidos2);
-        Repartidor r3 = new Repartidor("Luis", pedidos3);
+        // Crear repartidores
+        Repartidor r1 = new Repartidor("Juan", zonaDeCarga);
+        Repartidor r2 = new Repartidor("Ana", zonaDeCarga);
+        Repartidor r3 = new Repartidor("Pedro", zonaDeCarga);
 
         ExecutorService executor = Executors.newFixedThreadPool(3);
 
@@ -33,5 +28,11 @@ public class Main {
         executor.execute(r3);
 
         executor.shutdown();
+
+        while (!executor.isTerminated()) {
+            // espera
+        }
+
+        System.out.println("\n🎉 Todos los pedidos han sido entregados correctamente");
     }
 }
