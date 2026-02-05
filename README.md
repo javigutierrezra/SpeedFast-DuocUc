@@ -1,129 +1,89 @@
-SpeedFast – Semana 4
+# SpeedFast – Semana 5  
+## Sincronizando procesos en sistemas concurrentes
 
-📌 Ejecutando tareas en paralelo con hilos en Java
+### Descripción de la actividad
+Esta actividad corresponde a la **quinta semana** del módulo de Programación en Java y tiene como objetivo aplicar **mecanismos de sincronización** en sistemas concurrentes.
 
-Este proyecto corresponde a la Semana 4 del caso SpeedFast, una empresa dedicada al reparto de pedidos de comida, encomiendas y compras express. En esta etapa se incorporó programación concurrente en Java, permitiendo simular múltiples repartidores realizando entregas al mismo tiempo mediante hilos.
+El sistema simula el funcionamiento de la empresa **SpeedFast**, donde múltiples repartidores trabajan en paralelo retirando pedidos desde una **zona de carga compartida**. Para evitar errores como entregas duplicadas, se implementan técnicas de control de concurrencia que garantizan que cada pedido sea atendido por un único repartidor.
 
-El objetivo principal es demostrar el uso de:
-	•	Programación orientada a objetos
-	•	Interfaces y clases abstractas
-	•	Hilos con Runnable
-	•	Ejecución concurrente con ExecutorService
+---
 
-⸻
+### Objetivo
+Diseñar e implementar un sistema concurrente en Java que:
+- Utilice `Thread`, `Runnable` y sincronización.
+- Controle el acceso a un recurso compartido.
+- Evite condiciones de carrera.
+- Garantice la integridad de los datos durante el proceso de despacho.
 
-🧠 Descripción del sistema
+---
 
-El sistema modela distintos tipos de pedidos y repartidores que los entregan de forma simultánea:
+### Tecnologías utilizadas
+- Java
+- IntelliJ IDEA
+- Programación concurrente
+- ExecutorService
+- Sincronización con `synchronized`
 
-🔹 Tipos de pedidos
+---
 
-Todos los pedidos heredan de la clase abstracta Pedido:
-	•	PedidoComida
-	•	PedidoEncomienda
-	•	PedidoExpress
+### Estructura del proyecto
+src
+└── speedfast
+├── Main.java
+├── Pedido.java
+├── EstadoPedido.java
+├── ZonaDeCarga.java
+└── Repartidor.java
+---
 
-Cada pedido contiene:
-	•	idPedido
-	•	direccionEntrega
-	•	distanciaKm
+### Descripción de las clases
 
-Y métodos como:
-	•	calcularTiempoEntrega()
-	•	mostrarResumen()
+#### Pedido
+Representa una encomienda del sistema. Contiene un identificador, dirección de entrega y un estado que indica su progreso dentro del proceso de despacho.
 
-🔹 Interfaces implementadas
-	•	Despachable → permite despachar pedidos
-	•	Cancelable → permite cancelar pedidos
-	•	Rastreable → permite rastrear y ver historial del pedido
+#### EstadoPedido
+Enum que define los posibles estados de un pedido:
+- PENDIENTE
+- EN_REPARTO
+- ENTREGADO
 
-🔹 Concurrencia
+#### ZonaDeCarga
+Recurso compartido donde se almacenan los pedidos pendientes. El acceso a esta clase está sincronizado para evitar que más de un repartidor retire el mismo pedido.
 
-Cada repartidor es representado por la clase Repartidor, la cual:
-	•	Implementa la interfaz Runnable
-	•	Recorre su lista de pedidos
-	•	Simula la entrega usando Thread.sleep() con tiempos aleatorios
-	•	Muestra el progreso en consola
+#### Repartidor
+Representa a un repartidor que trabaja en un hilo independiente. Retira pedidos desde la zona de carga, simula la entrega y actualiza el estado del pedido.
 
-Los repartidores se ejecutan en paralelo usando ExecutorService desde la clase Main.
+#### Main
+Clase principal que inicializa el sistema, crea los pedidos, instancia los repartidores y ejecuta la simulación concurrente utilizando `ExecutorService`.
 
-⸻
+---
 
-🗂️ Estructura del proyecto
+### Funcionamiento del sistema
+1. Los pedidos son agregados a la zona de carga.
+2. Varios repartidores trabajan en paralelo.
+3. Cada repartidor retira un pedido de forma sincronizada.
+4. El pedido pasa por los estados EN_REPARTO y ENTREGADO.
+5. El proceso finaliza cuando todos los pedidos han sido entregados.
 
-speedfast/
- ├── src/
- │    ├── Main.java
- │    ├── Repartidor.java
- │    ├── pedidos/
- │    │    ├── Pedido.java
- │    │    ├── PedidoComida.java
- │    │    ├── PedidoEncomienda.java
- │    │    └── PedidoExpress.java
- │    └── interfaces/
- │         ├── Despachable.java
- │         ├── Cancelable.java
- │         └── Rastreable.java
+---
 
+### Resultado esperado
+El sistema garantiza que:
+- Cada pedido sea entregado una sola vez.
+- No existan conflictos por acceso concurrente.
+- Todos los pedidos finalicen en estado ENTREGADO.
 
-⸻
+Al finalizar la ejecución, se muestra el mensaje:
 
-▶️ Ejecución del programa
+**"Todos los pedidos han sido entregados correctamente"**
 
-Requisitos
-	•	Java JDK 11 o superior
-	•	IntelliJ IDEA
+---
 
-Pasos para ejecutar
-	1.	Abrir la carpeta speedfast en IntelliJ
-	2.	Verificar que el SDK de Java esté configurado
-	3.	Abrir Main.java
-	4.	Presionar el botón ▶️ Run
-
-⸻
-
-🖥️ Ejemplo de salida en consola
-
-=== SpeedFast - Simulación de Entregas Concurrentes ===
-🚴 Repartidor Carlos inicia su ruta...
-🚴 Repartidor Ana inicia su ruta...
-🚴 Repartidor Luis inicia su ruta...
-📦 Carlos entregando pedido #1
-📦 Ana entregando pedido #3
-📦 Luis entregando pedido #5
-⏳ Carlos tardará 3 segundos...
-...
-🏁 Repartidor Carlos terminó su ruta.
-
-La salida varía en cada ejecución debido a los tiempos aleatorios y la ejecución concurrente de los hilos.
-
-⸻
-
-🎯 Objetivo académico
-
-Este proyecto permite comprender:
-	•	El uso de herencia y polimorfismo en Java
-	•	La implementación de interfaces
-	•	La creación y ejecución de hilos con Runnable
-	•	La gestión de concurrencia con ExecutorService
-	•	La simulación de procesos multitarea en un entorno realista
-
-⸻
-
-👩‍💻 Autor
-
+### Autor
 Javiera Gutierrez
-Proyecto académico – Programación en Java
-Semana 4 – SpeedFast
 
-⸻
+---
 
-📦 Repositorio
+### Observaciones
+Este proyecto demuestra el uso correcto de programación concurrente y sincronización en Java, aplicando buenas prácticas para el manejo de recursos compartidos.
 
-Este proyecto forma parte de un repositorio que contiene el desarrollo del sistema SpeedFast organizado por semanas:
-
-SpeedFastRepo/
- ├── semana 3/
- └── semana 4/
-
-Cada carpeta representa una etapa del desarrollo del sistema.
