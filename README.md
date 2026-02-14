@@ -1,129 +1,44 @@
-SpeedFast – Semana 4
+# 🚚 SpeedFast - Sistema de Gestión de Entregas
 
-📌 Ejecutando tareas en paralelo con hilos en Java
+Aplicación de escritorio desarrollada en Java utilizando Swing para la gestión de pedidos en la empresa SpeedFast.
 
-Este proyecto corresponde a la Semana 4 del caso SpeedFast, una empresa dedicada al reparto de pedidos de comida, encomiendas y compras express. En esta etapa se incorporó programación concurrente en Java, permitiendo simular múltiples repartidores realizando entregas al mismo tiempo mediante hilos.
+## 📌 Descripción
 
-El objetivo principal es demostrar el uso de:
-	•	Programación orientada a objetos
-	•	Interfaces y clases abstractas
-	•	Hilos con Runnable
-	•	Ejecución concurrente con ExecutorService
+Este proyecto implementa una interfaz gráfica que permite:
 
-⸻
+- Registrar nuevos pedidos.
+- Visualizar pedidos en una tabla.
+- Gestionar datos en memoria.
+- Navegar entre distintas ventanas del sistema.
 
-🧠 Descripción del sistema
+La aplicación fue desarrollada aplicando programación orientada a objetos y organización por capas (Modelo - Vista - Controlador).
 
-El sistema modela distintos tipos de pedidos y repartidores que los entregan de forma simultánea:
+## 🛠 Tecnologías utilizadas
 
-🔹 Tipos de pedidos
+- Java JDK 17+
+- Java Swing
+- IntelliJ IDEA
 
-Todos los pedidos heredan de la clase abstracta Pedido:
-	•	PedidoComida
-	•	PedidoEncomienda
-	•	PedidoExpress
+## 📂 Estructura del proyecto
+src
+├── main
+├── modelo
+├── controlador
+└── vista
 
-Cada pedido contiene:
-	•	idPedido
-	•	direccionEntrega
-	•	distanciaKm
+## ▶️ Cómo ejecutar
 
-Y métodos como:
-	•	calcularTiempoEntrega()
-	•	mostrarResumen()
+1. Abrir el proyecto en IntelliJ IDEA.
+2. Ejecutar la clase `Main` ubicada en el paquete `main`.
+3. Se abrirá la ventana principal del sistema.
 
-🔹 Interfaces implementadas
-	•	Despachable → permite despachar pedidos
-	•	Cancelable → permite cancelar pedidos
-	•	Rastreable → permite rastrear y ver historial del pedido
+## ✨ Funcionalidades implementadas
 
-🔹 Concurrencia
+- Registro de pedidos con validación de campos.
+- Listado de pedidos mediante JTable y DefaultTableModel.
+- Navegación entre ventanas.
+- Almacenamiento de datos en memoria mediante ArrayList.
 
-Cada repartidor es representado por la clase Repartidor, la cual:
-	•	Implementa la interfaz Runnable
-	•	Recorre su lista de pedidos
-	•	Simula la entrega usando Thread.sleep() con tiempos aleatorios
-	•	Muestra el progreso en consola
-
-Los repartidores se ejecutan en paralelo usando ExecutorService desde la clase Main.
-
-⸻
-
-🗂️ Estructura del proyecto
-
-speedfast/
- ├── src/
- │    ├── Main.java
- │    ├── Repartidor.java
- │    ├── pedidos/
- │    │    ├── Pedido.java
- │    │    ├── PedidoComida.java
- │    │    ├── PedidoEncomienda.java
- │    │    └── PedidoExpress.java
- │    └── interfaces/
- │         ├── Despachable.java
- │         ├── Cancelable.java
- │         └── Rastreable.java
-
-
-⸻
-
-▶️ Ejecución del programa
-
-Requisitos
-	•	Java JDK 11 o superior
-	•	IntelliJ IDEA
-
-Pasos para ejecutar
-	1.	Abrir la carpeta speedfast en IntelliJ
-	2.	Verificar que el SDK de Java esté configurado
-	3.	Abrir Main.java
-	4.	Presionar el botón ▶️ Run
-
-⸻
-
-🖥️ Ejemplo de salida en consola
-
-=== SpeedFast - Simulación de Entregas Concurrentes ===
-🚴 Repartidor Carlos inicia su ruta...
-🚴 Repartidor Ana inicia su ruta...
-🚴 Repartidor Luis inicia su ruta...
-📦 Carlos entregando pedido #1
-📦 Ana entregando pedido #3
-📦 Luis entregando pedido #5
-⏳ Carlos tardará 3 segundos...
-...
-🏁 Repartidor Carlos terminó su ruta.
-
-La salida varía en cada ejecución debido a los tiempos aleatorios y la ejecución concurrente de los hilos.
-
-⸻
-
-🎯 Objetivo académico
-
-Este proyecto permite comprender:
-	•	El uso de herencia y polimorfismo en Java
-	•	La implementación de interfaces
-	•	La creación y ejecución de hilos con Runnable
-	•	La gestión de concurrencia con ExecutorService
-	•	La simulación de procesos multitarea en un entorno realista
-
-⸻
-
-👩‍💻 Autor
+## 📌 Autor
 
 Javiera Gutierrez
-Proyecto académico – Programación en Java
-Semana 4 – SpeedFast
-
-⸻
-
-📦 Repositorio
-
-Este proyecto forma parte de un repositorio que contiene el desarrollo del sistema SpeedFast organizado por semanas:
-
-SpeedFastRepo/
- ├── semana 3/
- └── semana 4/
-
-Cada carpeta representa una etapa del desarrollo del sistema.
