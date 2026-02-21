@@ -1,43 +1,88 @@
-# 🚚 SpeedFast - Sistema de Gestión de Entregas
+🚚 SpeedFast – Conexión Java con MySQL mediante JDBC
 
-Aplicación de escritorio desarrollada en Java utilizando Swing para la gestión de pedidos en la empresa SpeedFast.
+Proyecto desarrollado para la actividad formativa:
 
-## 📌 Descripción
+“Conectando aplicaciones Java con bases de datos mediante JDBC”
 
-Este proyecto implementa una interfaz gráfica que permite:
+📌 Descripción
 
-- Registrar nuevos pedidos.
-- Visualizar pedidos en una tabla.
-- Gestionar datos en memoria.
-- Navegar entre distintas ventanas del sistema.
+SpeedFast es una aplicación desarrollada en Java que permite registrar y gestionar pedidos, repartidores y entregas, conectando la interfaz gráfica con una base de datos MySQL utilizando JDBC.
 
-La aplicación fue desarrollada aplicando programación orientada a objetos y organización por capas (Modelo - Vista - Controlador).
+La aplicación permite:
+	•	Registrar pedidos.
+	•	Registrar repartidores.
+	•	Asociar entregas a pedidos.
+	•	Guardar información de manera persistente en la base de datos.
+	•	Consultar información almacenada.
+  
+  🛠 Tecnologías utilizadas
+	•	Java
+	•	IntelliJ IDEA
+	•	MySQL
+	•	MySQL Workbench
+	•	JDBC (mysql-connector-j)
 
-## 🛠 Tecnologías utilizadas
+  🗄 Base de datos
 
-- Java JDK 17+
-- Java Swing
-- IntelliJ IDEA
+Nombre de la base de datos:
+speedfast_db
 
-## 📂 Estructura del proyecto
-src
-├── main
-├── modelo
-├── controlador
-└── vista
+Tablas implementadas:
+	•	repartidor
+	•	pedido
+	•	entrega
 
-## ▶️ Cómo ejecutar
+Relaciones:
+	•	Un repartidor puede realizar muchas entregas.
+	•	Un pedido puede tener una o más entregas.
+	•	Cada entrega está asociada a un pedido y a un repartidor.
 
-1. Abrir el proyecto en IntelliJ IDEA.
-2. Ejecutar la clase `Main` ubicada en el paquete `main`.
-3. Se abrirá la ventana principal del sistema.
+🔌 Conexión a la base de datos
 
-## ✨ Funcionalidades implementadas
+La conexión se realiza mediante la clase:
+ConexionDB
 
-- Registro de pedidos con validación de campos.
-- Listado de pedidos mediante JTable y DefaultTableModel.
-- Navegación entre ventanas.
-- Almacenamiento de datos en memoria mediante ArrayList.
+Utilizando:
+DriverManager.getConnection(URL, USER, PASSWORD);
+
+Se emplea PreparedStatement para realizar inserciones seguras y evitar inyección SQL.
+
+📂 Estructura del proyecto
+src/
+│
+├── main/
+│   └── Main.java
+│
+├── modelo/
+│   ├── Pedido.java
+│   ├── Repartidor.java
+│   └── Entrega.java
+│
+├── dao/
+│   ├── ConexionDB.java
+│   ├── PedidoDAO.java
+│   ├── RepartidorDAO.java
+│   └── EntregaDAO.java
+│
+└── vista/
+    ├── VentanaPrincipal.java
+    └── Formularios
+
+▶ Cómo ejecutar el proyecto
+	1.	Clonar el repositorio.
+	2.	Crear la base de datos speedfast_db en MySQL.
+	3.	Ejecutar el script de creación de tablas.
+	4.	Configurar usuario y contraseña en ConexionDB.
+	5.	Ejecutar la clase Main.
+
+  
+✅ Estado del proyecto
+
+✔ Conexión exitosa con MySQL
+✔ Inserción de datos desde la interfaz
+✔ Persistencia real en la base de datos
+✔ Implementación correcta de JDBC
+
 
 ## 📌 Autor
 
