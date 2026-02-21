@@ -1,4 +1,4 @@
-🚚 SpeedFast – Conexión Java con MySQL mediante JDBC
+🚚 SpeedFast – Conexión Java con MySQL mediante JDBC - Semana 7
 
 Proyecto desarrollado para la actividad formativa:
 
