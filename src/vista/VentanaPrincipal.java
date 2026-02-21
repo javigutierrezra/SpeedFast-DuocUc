@@ -1,53 +1,30 @@
 package vista;
 
-import controlador.ControladorPedidos;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
 
-    private ControladorPedidos controlador;
+    private JButton btnNuevoPedido;
 
     public VentanaPrincipal() {
 
-        // Inicializamos el controlador (lista en memoria compartida)
-        controlador = new ControladorPedidos();
-
-        // Configuración básica de la ventana
-        setTitle("SpeedFast - Sistema de Gestión");
-        setSize(400, 250);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("SpeedFast - Menú Principal");
+        setSize(300, 200);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
 
-        // Layout
-        setLayout(new GridLayout(3, 1, 10, 10));
+        btnNuevoPedido = new JButton("Registrar Pedido");
+        btnNuevoPedido.setBounds(60, 50, 180, 40);
+        add(btnNuevoPedido);
 
-        // Botones
-        JButton btnRegistrar = new JButton("Registrar Pedido");
-        JButton btnListar = new JButton("Listar Pedidos");
-        JButton btnAsignar = new JButton("Asignar Repartidor / Iniciar Entrega");
+        btnNuevoPedido.addActionListener(e -> {
+            FormPedido form = new FormPedido();
+            form.setVisible(true);
+        });
+    }
 
-        // Agregar botones a la ventana
-        add(btnRegistrar);
-        add(btnListar);
-        add(btnAsignar);
-
-        // Acción botón Registrar
-        btnRegistrar.addActionListener(e ->
-                new VentanaRegistroPedido(controlador)
-        );
-
-        // Acción botón Listar
-        btnListar.addActionListener(e ->
-                new VentanaListaPedidos(controlador)
-        );
-
-        // Acción botón Asignar / Iniciar entrega
-        btnAsignar.addActionListener(e ->
-                new VentanaAsignarRepartidor(controlador)
-        );
-
-        setVisible(true);
+    public static void main(String[] args) {
+        new VentanaPrincipal().setVisible(true);
     }
 }
