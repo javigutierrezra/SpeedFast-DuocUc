@@ -11,6 +11,14 @@ public class Entrega {
     private Date fecha;
     private Time hora;
 
+    public Entrega(int id, int idPedido, int idRepartidor, Date fecha, Time hora) {
+        this.id = id;
+        this.idPedido = idPedido;
+        this.idRepartidor = idRepartidor;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
+
     public Entrega(int idPedido, int idRepartidor, Date fecha, Time hora) {
         this.idPedido = idPedido;
         this.idRepartidor = idRepartidor;
@@ -18,8 +26,11 @@ public class Entrega {
         this.hora = hora;
     }
 
+    public int getId() { return id; }
     public int getIdPedido() { return idPedido; }
     public int getIdRepartidor() { return idRepartidor; }
     public Date getFecha() { return fecha; }
     public Time getHora() { return hora; }
+
+    public void setId(int id) { this.id = id; }
 }

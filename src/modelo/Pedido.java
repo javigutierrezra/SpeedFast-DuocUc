@@ -25,12 +25,8 @@ public class Pedido {
     public String getTipo() { return tipo; }
     public String getEstado() { return estado; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    // 👇 AGREGA ESTO
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    public void setId(int id) { this.id = id; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+    public void setEstado(String estado) { this.estado = estado; }
 }
