@@ -1,3 +1,66 @@
+🚀 SpeedFast - Sistema de Gestión de Pedidos
+
+📌 Descripción
+
+SpeedFast es una aplicación de escritorio desarrollada en Java utilizando Programación Orientada a Objetos, Swing para la interfaz gráfica y JDBC para la conexión con una base de datos MySQL.
+
+El sistema permite gestionar de forma persistente:
+	•	Repartidores
+	•	Pedidos
+	•	Entregas
+
+Implementando operaciones CRUD (Create, Read, Update, Delete) para cada entidad.
+
+⸻
+
+🛠 Tecnologías Utilizadas
+	•	Java
+	•	Swing (JFrame, JTable, JComboBox, JButton, etc.)
+	•	MySQL
+	•	JDBC
+	•	PreparedStatement
+	•	ResultSet
+
+⸻
+
+🗂 Arquitectura del Proyecto
+
+El proyecto está organizado en capas:
+
+📁 modelo
+
+Contiene las clases que representan las entidades del sistema:
+	•	Repartidor
+	•	Pedido
+	•	Entrega
+
+📁 dao
+
+Contiene las clases DAO responsables del acceso a datos:
+	•	RepartidorDAO
+	•	PedidoDAO
+	•	EntregaDAO
+
+Estas clases utilizan:
+	•	PreparedStatement (seguridad y prevención de SQL Injection)
+	•	ResultSet (lectura de datos)
+	•	Try-with-resources para cierre automático de conexiones
+
+📁 vista
+
+Contiene las ventanas del sistema:
+	•	VentanaPrincipal
+	•	VentanaRepartidores
+	•	VentanaPedidos
+	•	VentanaEntrega
+
+⸻
+
+🗄 Base de Datos
+
+Base de datos utilizada:
+speedfast_db
+
 Tablas implementadas:
 
 Tabla: repartidor
